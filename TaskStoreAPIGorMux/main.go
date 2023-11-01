@@ -56,7 +56,8 @@ func (a *App) getTaskHandler(w http.ResponseWriter, r *http.Request) {
 	// Select the task with the given id, and convert to JSON.
 	result := a.DB.First(&task, "id = ?", vars["id"])
 	if result.RowsAffected == 0 {
-		w.WriteHeader(404)
+		http.Error(w, "error: id not found in DataBase", http.StatusNotFound)
+		//w.WriteHeader(404)
 		return
 	}
 	taskJSON, _ := json.Marshal(task)
@@ -86,7 +87,8 @@ func (a *App) createTaskHandler(w http.ResponseWriter, r *http.Request) {
 
 	taskJSON, err := json.Marshal(ResponseId{Id: newTask.Id})
 	if err != nil {
-		w.WriteHeader(500) // код ошибки 500
+		http.Error(w, "error: not create task", http.StatusInternalServerError)
+		//w.WriteHeader(500) // код ошибки 500
 		return
 	}
 
@@ -102,7 +104,8 @@ func (a *App) getTaskHandlerByTag(w http.ResponseWriter, r *http.Request) {
 	// Select the task with the given id, and convert to JSON.
 	err := a.DB.Where(&task, "tags = ?", vars["tag"])
 	if err.Error != nil {
-		w.WriteHeader(404)
+		http.Error(w, "error: tag not found in DataBase", http.StatusNotFound)
+		//w.WriteHeader(404)
 		return
 	}
 	taskJSON, _ := json.Marshal(task)
@@ -118,7 +121,8 @@ func (a *App) deleteTaskHandler(w http.ResponseWriter, r *http.Request) {
 	// Delete the task with the given id.
 	err := a.DB.Where("id = ?", vars["id"]).Delete(Task{})
 	if err.Error != nil {
-		w.WriteHeader(404)
+		http.Error(w, "error: id not found in DataBase", http.StatusNotFound)
+		//w.WriteHeader(404)
 		return
 	}
 
@@ -130,7 +134,8 @@ func (a *App) deleteAllTaskHandler(w http.ResponseWriter, r *http.Request) {
 	// Delete all tasks.
 	err := a.DB.Exec("DELETE FROM tasks")
 	if err.Error != nil {
-		w.WriteHeader(500)
+		http.Error(w, "error: not create task", http.StatusInternalServerError)
+		//w.WriteHeader(500)
 		return
 	}
 
