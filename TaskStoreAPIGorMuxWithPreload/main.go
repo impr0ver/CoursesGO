@@ -117,6 +117,7 @@ func (a *App) getTaskHandlerByTag(w http.ResponseWriter, r *http.Request) {
 	var task Task
 	var tags []Tag
 	var foundTasks []Task
+
 	vars := mux.Vars(r)
 
 	res := a.DB.Where("text = ?", vars["tag"]).Find(&tags)
@@ -130,12 +131,13 @@ func (a *App) getTaskHandlerByTag(w http.ResponseWriter, r *http.Request) {
 		a.DB.Preload("Tags").Find(&task, tag.TaskID)
 		foundTasks = append(foundTasks, task)
 	}
-	
+
 	taskJSON, _ := json.Marshal(&foundTasks)
 
 	// Write to HTTP response.
 	w.WriteHeader(200)
 	w.Write([]byte(taskJSON))
+
 }
 
 func (a *App) getTaskHandlerByDue(w http.ResponseWriter, r *http.Request) {
