@@ -140,7 +140,7 @@ func (a *App) getTaskHandlerByDue(w http.ResponseWriter, r *http.Request) {
 	reqTimeStr := fmt.Sprintf("20%s-%s-%s", vars["yy"], vars["mm"], vars["dd"])
 	needTime, _ := time.Parse("2006-01-02", reqTimeStr)
 
-	err := a.DB.Debug().Model(&Task{}).Where("due = ?", datatypes.Date(needTime)).Find(&tasks)
+	err := a.DB.Model(&Task{}).Where("due = ?", datatypes.Date(needTime)).Find(&tasks)
 	if err.RowsAffected == 0 {
 		//w.WriteHeader(200)
 		http.Error(w, "error: tag not found in DataBase", http.StatusNotFound)
