@@ -1,0 +1,112 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "TaskStoreAPIGorMux",
+    "dateExported": "2023-11-03T12:29:30.601Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "2ee51058-f06d-4b42-b235-6e7e96832733",
+            "colId": "75a58b0c-e78f-4e79-93ba-717c444a7da4",
+            "containerId": "",
+            "name": "Get All Tasks",
+            "url": "http://127.0.0.1:8080/task/",
+            "method": "GET",
+            "sortNum": 2500,
+            "created": "2023-10-31T17:20:56.146Z",
+            "modified": "2023-10-31T18:12:58.512Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "5df2d912-d50e-49cf-b071-67f0bf43a9c6",
+            "colId": "75a58b0c-e78f-4e79-93ba-717c444a7da4",
+            "containerId": "",
+            "name": "Post New Task",
+            "url": "http://127.0.0.1:8080/task/",
+            "method": "POST",
+            "sortNum": 5000,
+            "created": "2023-10-31T17:20:56.147Z",
+            "modified": "2023-11-01T04:42:24.927Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"text\": \"first task\",\n  \"tags\": [\n    \"tags1\", \"tags2\", \"tags3\", \"tags4\"\n    ],\n  \"due\": \"2023-11-01T10:15:00Z\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "827a6f28-7723-4ab5-82e8-9c9cc605d6ed",
+            "colId": "75a58b0c-e78f-4e79-93ba-717c444a7da4",
+            "containerId": "",
+            "name": "Get Task By Id",
+            "url": "http://127.0.0.1:8080/task/34",
+            "method": "GET",
+            "sortNum": 15000,
+            "created": "2023-10-31T17:20:56.149Z",
+            "modified": "2023-11-03T10:14:43.968Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "ccfc35c0-948e-4f2d-a886-638c3c268198",
+            "colId": "75a58b0c-e78f-4e79-93ba-717c444a7da4",
+            "containerId": "",
+            "name": "Delete All Tasks",
+            "url": "http://127.0.0.1:8080/task/",
+            "method": "DELETE",
+            "sortNum": 30000,
+            "created": "2023-10-31T17:20:56.148Z",
+            "modified": "2023-10-31T19:48:51.125Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "65e6de53-b6ce-4f1d-8a86-5d6cbcc2939c",
+            "colId": "75a58b0c-e78f-4e79-93ba-717c444a7da4",
+            "containerId": "",
+            "name": "Delete Task By Id",
+            "url": "http://127.0.0.1:8080/task/2",
+            "method": "DELETE",
+            "sortNum": 40000,
+            "created": "2023-10-31T17:20:56.150Z",
+            "modified": "2023-10-31T19:45:16.336Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "03faba6c-7136-4508-85d0-a0f34c82bd7d",
+            "colId": "75a58b0c-e78f-4e79-93ba-717c444a7da4",
+            "containerId": "",
+            "name": "Get Task By Tag",
+            "url": "http://127.0.0.1:8080/tag/tags666",
+            "method": "GET",
+            "sortNum": 50000,
+            "created": "2023-10-31T20:55:06.054Z",
+            "modified": "2023-11-03T12:28:35.341Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "a29f2389-d636-4ece-9d6c-097fead7f783",
+            "colId": "75a58b0c-e78f-4e79-93ba-717c444a7da4",
+            "containerId": "",
+            "name": "Get Task By Due",
+            "url": "http://127.0.0.1:8080/due/23/11/01",
+            "method": "GET",
+            "sortNum": 60000,
+            "created": "2023-11-02T19:24:32.742Z",
+            "modified": "2023-11-03T09:59:25.883Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        }
+    ]
+}
