@@ -71,7 +71,7 @@ func (a *App) getTaskHandler(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 
 	// Select the task with the given id, and convert to JSON.
-	result := a.DB.First(&task, "id = ?", vars["id"])
+	result := a.DB.Preload("Tags").First(&task, "id = ?", vars["id"])
 	if result.RowsAffected == 0 {
 		http.Error(w, "error: id not found in DataBase", http.StatusNotFound)
 		return
