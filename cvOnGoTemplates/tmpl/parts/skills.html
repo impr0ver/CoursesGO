@@ -1,0 +1,25 @@
+{{ define "body" }}
+
+<div class="text-center">
+    <h1>{{.Name}}'s CV -> Навыки и знания</h1>
+    <br>
+    <div class="list-group">
+        <a href="/main" class="list-group-item list-group-item-action" >Главная страница CV</a>
+        <a href="/about" class="list-group-item list-group-item-action"><b>О себе</b></a>
+        <a href="/skills" class="list-group-item list-group-item-action active" aria-current="true"><b>Навыки и знания</b></a>
+</div>
+
+<br>
+
+<!--Skills    string
+	Projects  string
+	Languages string-->
+<div class="text-start">
+    <ul class="list-group">
+        <li class="list-group-item"><b>Навыки:</b> {{.Skills}}</li>
+        <li class="list-group-item"><b>Участие в проектах:</b> {{.Projects}}</li>
+        <li class="list-group-item"><b>Языки программирования:</b> {{.Languages}}</li>
+      </ul>
+    </div>
+
+{{ end }}

@@ -1,0 +1,27 @@
+{{ define "body" }}
+
+<div class="text-center">
+    <h1>{{.Name}}'s CV -> О себе</h1>
+    <br>
+    <div class="list-group">
+        <a href="/main" class="list-group-item list-group-item-action" >Главная страница CV</a>
+        <a href="/about" class="list-group-item list-group-item-action active" aria-current="true"><b>О себе</b></a>
+        <a href="/skills" class="list-group-item list-group-item-action"><b>Навыки и знания</b></a>
+</div>
+
+<br>
+
+<div class="text-start">
+    <ul class="list-group">
+        <li class="list-group-item"><b>Имя:</b> {{.Name}}</li>
+        <li class="list-group-item"><b>Возраст:</b> {{.Age}}</li>
+        <li class="list-group-item"><b>Образование:</b> {{.Education}}</li>
+        <li class="list-group-item"><b>Должность:</b> {{.Role}}</li>
+        <li class="list-group-item"><b>Город:</b> {{.Location}}</li>
+        <li class="list-group-item"><b>Телефон:</b> {{.Phone}}</li>
+        <li class="list-group-item"><b>Email:</b> <a href="mailto:{{.Email}}">{{.Email}}</a></li>
+        <li class="list-group-item"><b>Страница Github:</b> <a href="https://{{.Github}}">{{.Github}}</a></li>
+      </ul>
+    </div>
+
+{{ end }}

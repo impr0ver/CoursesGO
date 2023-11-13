@@ -1,0 +1,79 @@
+{{ define "body" }}
+
+<div class="h5 bg-primary text-white text-center p-2 m-2">Заполните анкету:</div>
+    {{ if gt (len .Errors) 0}}
+        <ul class="text-danger mt-3">
+            {{ range .Errors }}
+                <li> {{ . }} </li>
+            {{ end }}
+        </ul>
+    {{ end }}
+
+<!--type Mycv struct {
+	Name      string
+	Age       string
+	Education string
+	Role      string
+	Location  string
+	Phone     string
+	Email     string
+	Github    string
+	Skills    string
+	Projects  string
+	Languages string
+}
+-->
+
+<form method="POST" class="m-2">
+    <div class="form-group my-1">
+        <label>Ваше имя:</label>
+            <input name="name" class="form-control" value="{{ .Name}}" />
+    </div>
+    <div class="form-group my-1">
+        <label>Ваш возраст:</label>
+            <input name="age" class="form-control" value="{{ .Age}}" />
+    </div>
+    <div class="form-group my-1">
+        <label>Ваше образование:</label>
+            <input name="education" class="form-control" value="{{ .Education}}" />
+    </div>
+    <div class="form-group my-1">
+        <label>Ваша текущая должность:</label>
+            <input name="role" class="form-control" value="{{ .Role}}" />
+    </div>
+    <div class="form-group my-1">
+        <label>Ваш город:</label>
+            <input name="location" class="form-control" value="{{ .Location}}" />
+    </div>
+    <div class="form-group my-1">
+        <label>Ваш телефон:</label>
+            <input name="phone" class="form-control" value="{{ .Phone}}" />
+    </div>
+    <div class="form-group my-1">
+        <label>Ваш email:</label>
+            <input name="email" class="form-control" value="{{ .Email}}" />
+    </div>
+    <div class="form-group my-1">
+        <label>Ваш GitHub:</label>
+            <input name="github" class="form-control" value="{{ .Github}}" />
+    </div>
+    <div class="form-group my-1">
+        <label>Ваши навыки:</label>
+            <input name="skills" class="form-control" value="{{ .Skills}}" />
+    </div>
+    <div class="form-group my-1">
+        <label>Ваши проекты:</label>
+            <input name="projects" class="form-control" value="{{ .Projects}}" />
+    </div>
+    <div class="form-group my-1">
+        <label>Языки программирования:</label>
+            <input name="languages" class="form-control" value="{{ .Languages}}" />
+    </div>
+    
+   
+    <div class="d-grid gap-2">
+        <button class="btn btn-warning" type="submit">Сгенерировать CV!</button>
+    </div>
+</form>
+
+{{ end }}

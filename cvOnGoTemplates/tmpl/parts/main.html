@@ -1,0 +1,20 @@
+{{ define "body" }}
+
+<div class="text-center">
+    <h1>{{if .Name}} {{.Name}}'s CV: {{else}} Create new CV {{end}}</h1>
+    
+    <br>
+    <div class="list-group">
+        <a href="/main" class="list-group-item list-group-item-action active" aria-current="true">Главная страница CV</a>
+        {{if .Name}} <a href="/about" class="list-group-item list-group-item-action" ><b>О себе</b></a> {{else}} <a href="/about" class="list-group-item list-group-item-action disabled" >О себе</a> {{end}}
+        {{if .Name}} <a href="/skills" class="list-group-item list-group-item-action"><b>Навыки и знания</b></a> {{else}} <a href="/skills" class="list-group-item list-group-item-action disabled">Навыки и знания</a>{{end}} 
+    </div>
+</div>
+<br>
+
+<div class="d-grid gap-2">
+    <a class="btn btn-secondary" href="/form" role="button">Заполнить анкету для генерации CV</a>
+</div>
+{{ end }}
+
+
