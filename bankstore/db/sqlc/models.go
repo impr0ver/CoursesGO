@@ -31,7 +31,7 @@ func (e *Currency) Scan(src interface{}) error {
 }
 
 type NullCurrency struct {
-	Currency Currency `json:"Currency"`
+	Currency Currency `json:"currency"`
 	Valid    bool     `json:"valid"` // Valid is true if Currency is not NULL
 }
 
@@ -57,7 +57,7 @@ type Account struct {
 	ID        int64              `json:"id"`
 	Owner     string             `json:"owner"`
 	Balance   int64              `json:"balance"`
-	Currency  interface{}        `json:"currency"`
+	Currency  Currency           `json:"currency"`
 	CreatedAt pgtype.Timestamptz `json:"created_at"`
 }
 

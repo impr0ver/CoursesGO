@@ -9,17 +9,24 @@ INSERT INTO transfers (
 
 -- name: GetTransfer :one
 SELECT * FROM transfers 
-WHERE id=$1 LIMIT 1;
+WHERE id = $1 
+LIMIT 1;
 
--- name: DeleteTransfer :exec
-DELETE FROM transfers
-WHERE id=$1;
+-- name: ListTransfers :many
+SELECT * FROM transfers
+WHERE 
+    from_account_id = $1 OR
+    to_account_id = $2
+ORDER BY id
+LIMIT $3
+OFFSET $4;
 
 -- name: UpdateTransfer :one
 UPDATE transfers
-SET amount = $2
+SET amount = $2, to_account_id = $3
 WHERE id = $1
 RETURNING *;
 
-
-
+-- name: DeleteTransfer :exec
+DELETE FROM transfers
+WHERE id = $1;
