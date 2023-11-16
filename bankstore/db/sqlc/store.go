@@ -55,13 +55,17 @@ type TransferTxResult struct {
 	ToEntry     Entry    `json:"to_entry"`
 }
 
-func (store *Store) TransferTx(ctx context.Context, arg TransferTxParams) (TransferTxResult, error) {
-	
-	var result TransferTxResult
+var txKey = struct{}{}
 
+func (store *Store) TransferTx(ctx context.Context, arg TransferTxParams) (TransferTxResult, error) {
+	var result TransferTxResult
 	err := store.execTx(ctx, func(q *Queries) error {
 		// Step 1. Create Transfer record
 		var err error
+
+		txName := ctx.Value(txKey)
+
+		fmt.Println(txName, "create transfer")
 		result.Transfer, err = q.CreateTransfer(ctx, CreateTransferParams{
 			FromAccountID: arg.FromAccountID,
 			ToAccountID:   arg.ToAccountID,
@@ -72,6 +76,7 @@ func (store *Store) TransferTx(ctx context.Context, arg TransferTxParams) (Trans
 		}
 
 		// Step 2. Create two Entry records
+		fmt.Println(txName, "create entry 1")
 		result.FromEntry, err = q.CreateEntry(ctx, CreateEntryParams{
 			AccountID: arg.FromAccountID,
 			Amount:    -arg.Amount,
@@ -80,6 +85,7 @@ func (store *Store) TransferTx(ctx context.Context, arg TransferTxParams) (Trans
 			return err
 		}
 
+		fmt.Println(txName, "create entry 2")
 		result.ToEntry, err = q.CreateEntry(ctx, CreateEntryParams{
 			AccountID: arg.ToAccountID,
 			Amount:    arg.Amount,
@@ -89,32 +95,40 @@ func (store *Store) TransferTx(ctx context.Context, arg TransferTxParams) (Trans
 		}
 
 		// TODO. Step 3. Update account's balance
-		accountFrom, err := q.GetAccount(ctx, arg.FromAccountID)
-		if err != nil {
-			return err
+		// Меняем порядок вызова для пар аккаунтов
+		if arg.FromAccountID < arg.ToAccountID {
+			result.FromAccount, result.ToAccount, err = AddMoney(ctx, q, arg.FromAccountID, -arg.Amount, arg.ToAccountID, arg.Amount)
+		} else {
+			result.ToAccount, result.FromAccount, err = AddMoney(ctx, q, arg.ToAccountID, arg.Amount, arg.FromAccountID, -arg.Amount)
 		}
-		accountTo, err := q.GetAccount(ctx, arg.ToAccountID)
-		if err != nil {
-			return err
-		}
-		
-		result.FromAccount, err = q.UpdateAccount(ctx, UpdateAccountParams{
-			ID: arg.FromAccountID,
-			Balance: accountFrom.Balance - arg.Amount,
-		})
-		if err != nil {
-			return err
-		}
-
-		result.ToAccount, err = q.UpdateAccount(ctx, UpdateAccountParams{
-			ID: arg.ToAccountID,
-			Balance: accountTo.Balance + arg.Amount,
-		})
-		if err != nil {
-			return err
-		}
-
-		return nil
+		return err
 	})
 	return result, err
+}
+
+// AddMoney as code refactor
+func AddMoney(
+	ctx context.Context,
+	q *Queries,
+	accountID1 int64,
+	amount1 int64,
+	accountID2 int64,
+	amount2 int64,
+) (account1 Account, account2 Account, err error) {
+	account1, err = q.AddAccountBalance(ctx, AddAccountBalanceParams{
+		ID:     accountID1,
+		Amount: amount1,
+	})
+	if err != nil {
+		return
+	}
+
+	account2, err = q.AddAccountBalance(ctx, AddAccountBalanceParams{
+		ID:     accountID2,
+		Amount: amount2,
+	})
+	if err != nil {
+		return
+	}
+	return
 }

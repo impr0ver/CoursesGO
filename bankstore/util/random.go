@@ -40,10 +40,6 @@ func RandomAmount() int64 {
 	return RandomInt(0, 1000)
 }
 
-//func RandomAmount() int64 {
-//	return 666
-//}
-
 func RandomCurrency() string {
 	currencies := []string{"USD", "EUR"}
 	n := len(currencies)

@@ -1,0 +1,84 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "Bankstore",
+    "dateExported": "2023-11-16T16:46:10.088Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "3a6aa728-2ab6-4392-b0c2-0101099a05c5",
+            "colId": "ba99b11d-b567-4dc3-95cd-b2e22f6d1be9",
+            "containerId": "",
+            "name": "CREATE account",
+            "url": "{{host}}{{port}}/accounts",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2023-11-16T15:54:10.660Z",
+            "modified": "2023-11-16T15:54:10.660Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"owner\": \"Petr Ivanov\",\n  \"currency\": \"EUR\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "b343e46b-186c-45b0-9ca4-732009f756ce",
+            "colId": "ba99b11d-b567-4dc3-95cd-b2e22f6d1be9",
+            "containerId": "",
+            "name": "GET account by id",
+            "url": "{{host}}{{port}}/account/11",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2023-11-16T15:54:10.662Z",
+            "modified": "2023-11-16T16:37:21.153Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "464474d4-c21a-4252-bbff-70d0e5284809",
+            "colId": "ba99b11d-b567-4dc3-95cd-b2e22f6d1be9",
+            "containerId": "",
+            "name": "GET ListAccounts",
+            "url": "{{host}}{{port}}/accounts/10/5",
+            "method": "GET",
+            "sortNum": 30000,
+            "created": "2023-11-16T15:55:23.469Z",
+            "modified": "2023-11-16T16:37:52.080Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "cdea8753-6f14-4f6c-a5fa-638c033f934e",
+            "colId": "ba99b11d-b567-4dc3-95cd-b2e22f6d1be9",
+            "containerId": "",
+            "name": "UPDATE account by id",
+            "url": "{{host}}{{port}}/account/1/999",
+            "method": "PUT",
+            "sortNum": 40000,
+            "created": "2023-11-16T16:21:37.717Z",
+            "modified": "2023-11-16T16:22:34.258Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "129392e4-b242-4d2c-adf2-fca5d890056e",
+            "colId": "ba99b11d-b567-4dc3-95cd-b2e22f6d1be9",
+            "containerId": "",
+            "name": "DELETE account by id",
+            "url": "{{host}}{{port}}/account/",
+            "method": "DELETE",
+            "sortNum": 50000,
+            "created": "2023-11-16T16:24:33.690Z",
+            "modified": "2023-11-16T16:32:43.863Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        }
+    ]
+}

@@ -1,0 +1,16 @@
+{
+    "client": "Thunder Client",
+    "environmentName": "bankstore",
+    "dateExported": "2023-11-16T16:46:44.113Z",
+    "version": "1.0",
+    "variables": [
+        {
+            "name": "host",
+            "value": "http://127.0.0.1"
+        },
+        {
+            "name": "port",
+            "value": ":8080"
+        }
+    ]
+}
