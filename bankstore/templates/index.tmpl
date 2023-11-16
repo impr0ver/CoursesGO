@@ -1,0 +1,229 @@
+
+
+<html lang="en">
+  <head>
+
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/mycss.css">
+    
+    
+
+
+    <title>{{ .title }}</title>
+    
+  </head>
+  
+  
+    <nav class="navbar navbar-expand-lg navbar-light bg-light p-3">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/index">{{.title}}</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+    
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav ms-auto ">
+          <li class="nav-item">
+              <a class="nav-link mx-2 active" aria-current="page" href="/index"><b>Главная</b></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link mx-2" href="#">Аккаунты</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link mx-2" href="#">Транзакции</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link mx-2" href="#">Вхождения</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link mx-2 dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Остальное
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <li><a class="dropdown-item" href="#">Link#</a></li>
+                <li><a class="dropdown-item" href="#">Link##</a></li>
+                <li><a class="dropdown-item" href="#">Link###</a></li>
+              </ul>
+            </li>
+          </ul>
+          <ul class="navbar-nav ms-auto d-none d-lg-inline-flex">
+          <li class="nav-item dropdown">
+              <a class="nav-link mx-2 dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <b>{{.user}}</b>
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <li><a class="dropdown-item" href="/login">Выйти</a></li>
+                
+                {{ if eq .user "Administrator"}} <li><a class="dropdown-item" href="#" disabled>Settings</a></li> {{end}}
+                
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    
+    
+
+
+<body>
+<header>
+  <div class="container-fluid"></div>
+</header>
+
+      <section class="a">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-6 col-xl-4 a1">
+                            <div class="form-body">
+                              <div class="row">
+                                  <div class="form-holder">
+                                  <!--<center>{{ if .hash }} <div class="alert alert-secondary" role="alert">Новый хеш "{{.hash}}" успешно зарегистрирован! </div>{{end}}</center>-->
+                      
+                                      <div class="form-content">
+                                          <div class="form-items">
+                                              <h3>Зарегистрировать новый Аккаунт</h3>
+                                              <p>Заполните данные ниже.</p>
+                                              <form class="requires-validation" method="POST" action="/index" novalidate id="signForm">
+                      
+                                                  <div class="col-md-12">
+                                                     <input class="form-control" type="text" name="owner" placeholder="Owner" required>
+                                                     <div class="valid-feedback">Owner указан</div>
+                                                     <div class="invalid-feedback">Owner не указан!</div>
+                                                  </div>
+                                                  
+                                                
+                                                  <div class="col-md-12">
+                                                    <input class="form-control" type="text" name="balance" placeholder="Balance" required>
+                                                     <div class="valid-feedback">Balance указан</div>
+                                                     <div class="invalid-feedback">Укажите Balance</div>
+                                                 </div>
+                                                  
+                                                  <div class="col-md-12">
+                                                      <select class="form-select mt-3" id="form-multiple-select" multiple="multiple" name="currency" required>
+                                                            <!--
+                                                            {{range .allDbUserNames}}
+                                                            <option value="{{.}}">{{.}}</option>
+                                                            {{end}}-->
+                                                            <option value="USD">USD</option>
+                                                            <option value="EUR">EUR</option>
+
+                                                     </select>
+                                                      <div class="valid-feedback">Currency указан</div>
+                                                      <div class="invalid-feedback">Currency не указан!</div>
+                                                 </div>
+                                                
+                                                  <div class="form-button mt-3">
+                                                      <button type="submit" id="btnSubmit" class="btn btn-primary">Зарегистрировать</button>
+                                                  </div>
+                                              </form>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                            </div>
+            </div>
+            
+            
+
+            
+            <div class="col-md-4 col-xl-8 a2">
+            <center>{{ if .message }} <div class="alert alert-secondary" role="alert">Аккаунт "{{.message}}" успешно зарегистрирован!</div>{{end}}</center>
+            <center>{{ if .errormessage }} <div class="alert alert-secondary" role="alert">Ошибка: аккаунт "{{.errormessage}}" уже существует!</div>{{end}}</center>
+                <table class="table table-striped table-hover table-bordered caption-top"> 
+                <caption style="color: #fff;">Список аккаунтов пользователя "{{.user}}"</caption>
+                      <thead class="table-light">
+                          <tr>
+                              <th>Owner</th>
+                              <th>Balance</th>
+                              <th>Currently</th>
+                          </tr>
+                      </thead>
+                      <tbody class="table-light">
+                        {{range .accounts}}
+                          <tr>
+                              <td>{{.Owner}}</td>
+                              <td>{{.Balance}}</td>
+                              <td>{{.Currency}}</td>
+                          </tr>
+                          {{end}}
+                           
+                      </tbody>
+                  </table>              
+            </div>
+            <!--<div class="col-md-6 col-xl-4 a3">A3</div>
+            <div class="col-md-6 col-xl-4 a4">A4</div>
+            <div class="col-md-6 col-xl-4 a5">A5</div>
+            <div class="col-md-6 col-xl-4 a6">A6</div>-->
+          </div>
+        </div>
+      </section>
+      <!--<section class="b">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-6 col-xl-3 b1">B1</div>
+            <div class="col-md-6 col-xl-3 b2">B2</div>
+            <div class="col-md-6 col-xl-3 b3">B3</div>
+            <div class="col-md-6 col-xl-3 b4">B4</div>
+          </div>
+        </div>
+      </section>-->
+      
+  
+  
+      
+  <footer>
+  <nav class="navbar fixed-bottom navbar-expand-lg navbar-light bg-light p-3">
+      <div class="container-fluid">
+        <span class="navbar-text">
+          <small class="text-muted">Created by E.Ivanov from Specialist Courses 2023</small>
+        </span>
+      </div>
+  </nav>
+</footer>
+</body>
+
+
+<script src="../assets/js/jquery.min.js"></script>
+<script src="../assets/js/bootstrap-multiselect.js"></script>
+
+<script src="../assets/js/bootstrap.bundle.min.js"></script>
+
+<script>
+$(document).ready(function() {
+        $('#form-multiple-select').multiselect({
+          nonSelectedText: 'Валюта',
+          nSelectedText: 'выбрано',
+          allSelectedText: 'Все',
+    templates: {
+      button: '<button class="multiselect btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"><span class="multiselect-selected-text"></span></button>',
+    },           
+        });
+    });
+</script>
+
+<script>
+(function () {
+'use strict'
+const forms = document.querySelectorAll('.requires-validation')
+Array.from(forms)
+  .forEach(function (form) {
+    form.addEventListener('submit', function (event) {
+    if (!form.checkValidity()) {
+        event.preventDefault()
+        event.stopPropagation()
+    }
+
+    // the solution are here
+    //else { 
+    //  sendForm();
+    //}
+      form.classList.add('was-validated')
+    }, true)
+  })
+})()
+</script>
+

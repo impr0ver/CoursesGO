@@ -77,3 +77,11 @@ type Transfer struct {
 	Amount    int64              `json:"amount"`
 	CreatedAt pgtype.Timestamptz `json:"created_at"`
 }
+
+type User struct {
+	ID         int64              `json:"id"`
+	Username   string             `json:"username"`
+	Password   string             `json:"password"`
+	Repassword string             `json:"repassword"`
+	CreatedAt  pgtype.Timestamptz `json:"created_at"`
+}

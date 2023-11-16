@@ -26,6 +26,14 @@ CREATE TABLE "transfers" (
   "created_at" timestamptz NOT NULL DEFAULT (now())
 );
 
+CREATE TABLE "users" (
+  "id" bigserial PRIMARY KEY,
+  "username" varchar NOT NULL,
+  "password" varchar NOT NULL,
+  "repassword" varchar NOT NULL,
+  "created_at" timestamptz NOT NULL DEFAULT (now())
+);
+
 CREATE INDEX ON "accounts" ("owner");
 
 CREATE INDEX ON "entries" ("account_id");

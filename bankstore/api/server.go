@@ -1,8 +1,10 @@
 package api
 
 import (
-	"github.com/gin-gonic/gin"
 	db "bankstore/db/sqlc"
+	"bankstore/middlewares"
+
+	"github.com/gin-gonic/gin"
 )
 
 type Server struct {
@@ -14,7 +16,24 @@ func NewServer(store *db.Store) *Server {
 	server := &Server{store: store}
 	router := gin.Default()
 
-	// TODO: add routes to router
+	
+	router.LoadHTMLGlob("./templates/*.tmpl")
+	router.Static("./assets", "./assets")
+
+	router.GET("/login", server.GenerateToken) //old token
+	router.POST("/login", server.GenerateToken)
+
+	router.GET("/register", server.RegisterUser)
+	router.POST("/register", server.RegisterUser)
+
+	secured := router.Group("").Use(middlewares.Auth()) // /secured middleware 
+	{
+		secured.GET("/index", server.IndexPageGet)
+		secured.GET("", server.IndexPageGet)
+	}
+
+
+	// API:
 	router.POST("/accounts", server.createAccount)
 	router.GET("/account/:id", server.getAccount)
 	router.GET("/accounts/:limit/:offset", server.getListAccounts)
