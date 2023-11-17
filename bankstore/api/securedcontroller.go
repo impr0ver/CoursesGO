@@ -17,7 +17,7 @@ func (server *Server) IndexPageGet(context *gin.Context) {
 
 	arg := db.ListAccountsParams{
 		Limit:  10,
-		Offset: 10,
+		Offset: 0,
 	}
 
 	accounts, err := server.store.ListAccounts(context, arg)
